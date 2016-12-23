@@ -9,7 +9,8 @@
     "start": "gulp start-web-server",
     "updateschema": "babel-node tools/updateSchema.js",
     "webpack": "NODE_ENV=production webpack -p",
-    "test": "gulp run-tests"
+    "test": "gulp run-tests",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2"
   },
   "author": "Thinkovator Inc",
   "license": "ISC",
@@ -32,6 +33,7 @@
     "babel-core": "^6.21.0",
     "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
@@ -43,6 +45,7 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.8.0",
     "exports-loader": "^0.6.3",
+    "flow-bin": "^0.37.4",
     "grunt-webpack": "^1.0.18",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
