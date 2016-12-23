@@ -77,8 +77,8 @@ gulp.task('run-tests', (done) => {
       module: {
         noParse: [/node_modules\/sinon\//],
         loaders: [
-          { test: /\.(js|jsx|es6)$/, loader: 'babel', exclude: /node_modules/ },
           { test: /\.json$/, loader: 'json' },
+          { test: /\.(js|jsx|es6)$/, loader: 'babel', exclude: /node_modules/ },
         ],
       },
       devtool: 'source-map',
