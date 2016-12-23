@@ -15,7 +15,6 @@ class UserList extends React.Component {
     return viewer.users.edges.map(({ node }) => (
       <User
         key={node.id}
-        viewer={viewer}
         user={node}
       />
     ));
@@ -34,17 +33,15 @@ export default Relay.createContainer(UserList, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
-        id
         users(first: 2) {
           edges {
-            node {
+						node {
               id
-              firstName
-              lastName
+              ${User.getFragment('user')}
             }
           }
         }
       }
-      `,
+    `,
   }
 });

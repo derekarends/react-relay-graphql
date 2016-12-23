@@ -7,7 +7,7 @@
     "build": "npm run lint && npm run update-schema && npm run webpack",
     "lint": "eslint *.js src tools",
     "start": "gulp start-web-server",
-    "upschema": "babel-node tools/updateSchema.js",
+    "updateschema": "babel-node tools/updateSchema.js",
     "webpack": "NODE_ENV=production webpack -p",
     "test": "gulp run-tests"
   },

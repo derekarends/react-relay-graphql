@@ -31,3 +31,6 @@ build
 
 # Will be built by CI
 dist
+
+# macOS
+.DS_Store

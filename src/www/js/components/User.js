@@ -3,7 +3,6 @@ import Relay from 'react-relay';
 
 class User extends React.Component {
   static propTypes = {
-    viewer: React.PropTypes.object.isRequired,
     relay: React.PropTypes.object.isRequired,
     user: React.PropTypes.object.isRequired,
   };
@@ -30,11 +29,6 @@ class User extends React.Component {
 
 export default Relay.createContainer(User, {
   fragments: {
-    viewer: () => Relay.QL`
-      fragment on Viewer {
-        id
-      }
-    `,
     user: () => Relay.QL`
       fragment on User {
         id

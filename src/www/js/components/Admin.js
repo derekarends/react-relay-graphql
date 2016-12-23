@@ -26,7 +26,8 @@ export default Relay.createContainer(Admin, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
-        id
+        id,
+        ${UserList.getFragment('viewer')}
       }
     `,
   },
