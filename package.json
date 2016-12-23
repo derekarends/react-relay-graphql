@@ -4,14 +4,15 @@
   "description": "Keep track of animals in kennels",
   "main": "index.js",
   "scripts": {
-    "build": "npm run lint && npm run updateschema && npm run webpack",
+    "build": "npm run lint && npm run update-schema && npm run webpack",
     "lint": "eslint *.js src tools",
     "start": "gulp start-web-server",
-    "updateschema": "babel-node tools/updateSchema.js",
+    "update-schema": "babel-node tools/updateSchema.js",
     "webpack": "NODE_ENV=production webpack -p",
-    "test": "gulp run-tests",
+    "test": "./node_modules/.bin/jest",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
-    "refresh": "npm run updateschema && npm run flow && npm run test && gulp"
+    "test-debug": "node --debug-brk ./node_modules/.bin/jest -i --no-cache",
+    "refresh": "npm run update-schema && npm run flow && npm run test && gulp"
   },
   "author": "Thinkovator Inc",
   "license": "ISC",
@@ -53,6 +54,7 @@
     "gulp-sass": "^3.0.0",
     "imports-loader": "^0.7.0",
     "jest-cli": "^18.0.0",
+    "json-loader": "^0.5.4",
     "react-addons-test-utils": "^15.4.1",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
@@ -60,7 +62,9 @@
     "webpack-stream": "^3.2.0"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    },
     "unmockedModulePathPatterns": [
       "react",
       "react-dom",
