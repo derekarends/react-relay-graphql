@@ -64,38 +64,6 @@ gulp.task('start-web-server', () => {
     require('./dist/server/server.js').default(config);
   });
 
-  gulp.task('run-tests', (done) => {
-    gulp.src('__tests__/all.js')
-      .pipe(webpackStream({
-        target: 'node',
-        output: { filename: 'specs.js', publicPath: '/__tests__/' },
-        resolve: { alias: { 'sinon': 'sinon/pkg/sinon' } },
-        externals: {
-          'react/lib/ExecutionEnvironment': true,
-          'react/lib/ReactContext': true,
-        },
-        module: {
-          noParse: [/node_modules\/sinon\//],
-          loaders: [{
-            test: /\.json$/,
-            loader: 'json',
-          }, {
-            test: /\.jsx*$/,
-            loader: 'babel-loader',
-            exclude: /node_modules/,
-            query: { presets: ['react', 'es2015'] },
-          }]
-        }
-      }))
-      .on('error', console.dir)
-      .pipe(gulp.dest('__tests__'))
-      .on('end', () => {
-        jest.runCLI({ '_': ['specs'], coverage: true }, __dirname, () => {
-          done();
-        });
-      });
-  });
-
 gulp.task('run-tests', (done) => {
   gulp.src('__tests__/all.js')
     .pipe(webpackStream({
