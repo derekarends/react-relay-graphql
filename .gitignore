@@ -31,6 +31,7 @@ build
 
 # Will be built by CI
 dist
-
+__tests__/specs.js
+__tests__/specs.js.map
 # macOS
 .DS_Store
