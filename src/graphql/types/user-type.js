@@ -1,3 +1,4 @@
+//@flow
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
 import { nodeInterface } from '../node-definitions';
