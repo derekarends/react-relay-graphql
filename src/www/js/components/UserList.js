@@ -4,10 +4,9 @@ import Relay from 'react-relay';
 
 import User from './User';
 
-class UserList extends React.Component {
+export class UserList extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object.isRequired,
-    relay: React.PropTypes.object.isRequired,
   };
 
   renderUsers() {

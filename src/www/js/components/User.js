@@ -2,7 +2,7 @@
 import React from 'react';
 import Relay from 'react-relay';
 
-export class User extends React.Component {
+class User extends React.Component {
   static propTypes = {
     user: React.PropTypes.object.isRequired,
   };
