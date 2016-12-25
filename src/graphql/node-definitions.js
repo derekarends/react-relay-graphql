@@ -1,3 +1,4 @@
+//@flow
 import { getNode, getNodeType } from './type-registry';
 import { nodeDefinitions } from 'graphql-relay';
 

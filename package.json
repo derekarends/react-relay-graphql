@@ -7,9 +7,12 @@
     "build": "npm run lint && npm run update-schema && npm run webpack",
     "lint": "eslint *.js src tools",
     "start": "gulp start-web-server",
-    "updateschema": "babel-node tools/updateSchema.js",
+    "update-schema": "babel-node tools/updateSchema.js",
     "webpack": "NODE_ENV=production webpack -p",
-    "test": "gulp run-tests"
+    "test": "./node_modules/.bin/jest",
+    "flow": "flow; test $? -eq 0 -o $? -eq 2",
+    "test-debug": "node --debug-brk ./node_modules/.bin/jest -i --no-cache",
+    "refresh": "npm run update-schema && npm run flow && npm run test && gulp"
   },
   "author": "Thinkovator Inc",
   "license": "ISC",
@@ -32,6 +35,7 @@
     "babel-core": "^6.21.0",
     "babel-jest": "^18.0.0",
     "babel-loader": "^6.2.10",
+    "babel-plugin-transform-flow-strip-types": "^6.21.0",
     "babel-polyfill": "^6.20.0",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
@@ -43,12 +47,14 @@
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.8.0",
     "exports-loader": "^0.6.3",
+    "flow-bin": "^0.37.4",
     "grunt-webpack": "^1.0.18",
     "gulp": "^3.9.1",
     "gulp-babel": "^6.1.2",
     "gulp-sass": "^3.0.0",
     "imports-loader": "^0.7.0",
     "jest-cli": "^18.0.0",
+    "json-loader": "^0.5.4",
     "react-addons-test-utils": "^15.4.1",
     "sinon": "^1.17.6",
     "webpack": "^1.14.0",
@@ -56,22 +62,8 @@
     "webpack-stream": "^3.2.0"
   },
   "jest": {
-    "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
-    "unmockedModulePathPatterns": [
-      "react",
-      "react-dom",
-      "react-addons-test-utils",
-      "fbjs",
-      "enzyme",
-      "cheerio",
-      "htmlparser2",
-      "underscore",
-      "lodash",
-      "domhandler",
-      "object.assign",
-      "define-properties",
-      "function-bind",
-      "object-keys"
-    ]
+    "transform": {
+      ".*": "<rootDir>/node_modules/babel-jest"
+    }
   }
 }

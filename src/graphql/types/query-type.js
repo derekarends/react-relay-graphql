@@ -1,3 +1,4 @@
+//@flow
 import { GraphQLObjectType } from 'graphql';
 import { viewerType } from './viewer-type';
 import { nodeField } from '../node-definitions';
@@ -11,5 +12,5 @@ export const queryType = new GraphQLObjectType({
       type: viewerType,
       resolve: () => getViewer(1),
     },
-  })
+  }),
 });

@@ -1,3 +1,4 @@
+//@flow
 import { GraphQLObjectType } from 'graphql';
 // import { insertWidgetMutationType } from './insert-widget-mutation-type';
 // import { updateWidgetMutationType } from './update-widget-mutation-type';
@@ -9,5 +10,5 @@ export const mutationType = new GraphQLObjectType({
     // insertWidget: insertWidgetMutationType,
     // updateWidget: updateWidgetMutationType,
     // deleteWidget: deleteWidgetMutationType,
-  })
+  }),
 });
