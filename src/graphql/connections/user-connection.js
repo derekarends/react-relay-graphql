@@ -1,3 +1,4 @@
+//@flow
 import { userType } from '../types/user-type';
 import { connectionDefinitions } from 'graphql-relay';
 
