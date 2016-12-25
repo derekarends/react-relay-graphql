@@ -4,7 +4,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { shallow } from 'enzyme';
-import { UserList } from '../../src/www/js/components/UserList.js';
+import UserList from '../../src/www/js/components/UserList.js';
+import User from '../../src/www/js/components/User.js';
 
 jest.unmock('../../src/www/js/components/UserList.js');
 jest.mock('react-relay');
@@ -13,25 +14,55 @@ describe('<UserList />', () => {
   let component;
   let componentDOMNode;
 
-  //viewer.users.edges
-  let viewer = {
-    users: {
-      edges: [
-      {
-        node: {
-          id: '1',
-          firstName: 'Derek',
-          lastName: 'Arends',
+  it('should render without error', () => {
+    //viewer.users.edges
+    let node = {
+      id: '1',
+      firstName: 'Derek',
+      lastName: 'Arends',
+    };
+
+    let viewer = {
+      users: {
+        edges: [
+        {
+          node: node,
+        }]
+      },
+    };
+
+    const component = shallow(<UserList viewer={viewer} />);
+
+    expect(component.contains(<ul><User user={node} /></ul>)).toBe(true);
+  });
+
+  it('should render multiple users', () => {
+    //viewer.users.edges
+    let node = {
+      id: '1',
+      firstName: 'Derek',
+      lastName: 'Arends',
+    };
+
+    let viewer = {
+      users: {
+        edges: [
+        {
+          node: node,
         },
-      }]
-    },
-  };
+        {
+          node: node,
+        }]
+      },
+    };
 
-  it('<UserList viewer={viewer}/> to show Derek Arends', () => {
-    const userComponent = shallow(
-      <UserList viewer={viewer} />
-    );
+    const component = shallow(<UserList viewer={viewer} />);
 
-    expect(userComponent.text()).toEqual('Derek Arends');
+    expect(component.contains(
+      <ul>
+        <User user={node} />
+        <User user={node} />
+      </ul>
+    )).toBe(true);
   });
 });

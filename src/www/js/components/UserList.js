@@ -4,7 +4,7 @@ import Relay from 'react-relay';
 
 import User from './User';
 
-export class UserList extends React.Component {
+class UserList extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object.isRequired,
   };
@@ -13,10 +13,7 @@ export class UserList extends React.Component {
     const { viewer } = this.props;
 
     return viewer.users.edges.map(({ node }) => (
-      <User
-        key={node.id}
-        user={node}
-      />
+      <User key={node.id} user={node} />
     ));
   }
 
