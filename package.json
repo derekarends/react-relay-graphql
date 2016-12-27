@@ -12,7 +12,8 @@
     "test": "./node_modules/.bin/jest",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "test-debug": "node --debug-brk ./node_modules/.bin/jest -i --no-cache",
-    "refresh": "npm run update-schema && npm run flow && npm run test && gulp"
+    "debug": "node --inspect --debug-brk ./dist/server/server-debug.js",
+    "refresh": "gulp && npm run update-schema && npm run flow && npm run test && gulp && npm start"
   },
   "author": "Thinkovator Inc",
   "license": "ISC",
@@ -25,6 +26,7 @@
     "graphql": "^0.8.2",
     "graphql-relay": "^0.4.4",
     "history": "^2.1.2",
+    "mongodb": "^2.2.16",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
     "react-relay": "^0.10.0",

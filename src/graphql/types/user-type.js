@@ -1,6 +1,6 @@
 //@flow
 import { GraphQLObjectType, GraphQLString } from 'graphql';
-import { globalIdField, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
+import { globalIdField } from 'graphql-relay';
 import { nodeInterface } from '../node-definitions';
 import { getUser } from '../../data/database';
 import User from '../../models/user';

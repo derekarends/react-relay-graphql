@@ -1,18 +1,31 @@
 import path from 'path';
-import http from 'http';
 import express from 'express';
 import graphqlHttp from 'express-graphql';
 import { schema } from '../graphql/schema';
+import { MongoClient } from 'mongodb';
+import config from './config.js';
 
-export default function(config) {
+export default function() {
   const app = express();
-  const server = http.createServer(app);
-  const graphqlHttpConfig = (schema) => ({ schema, pretty: true, graphiql: true });
+  MongoClient.connect(config.database.url).then(function (db) {
+    const graphqlHttpConfig = (schema) => ({
+      schema: schema,
+      pretty: config.graphql.pretty,
+      graphiql: config.graphql.graphi,
+      context: {
+        mongodb: db,
+      },
+    });
 
-  app.use('/graphql', graphqlHttp(graphqlHttpConfig(schema)));
-  app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
-  app.use(express.static(config.webServer.folder));
+    app.use('/graphql', graphqlHttp(graphqlHttpConfig(schema)));
+    app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
+    app.use(express.static(config.webServer.folder));
 
-  server.listen(config.webServer.port, () =>
-    console.log(`web server running on port ${config.webServer.port}`));
+    app.listen(config.webServer.port, () =>
+      console.log(`web server running on port ${config.webServer.port}`));
+  })
+  .catch(function (error) {
+    console.log('There has been a problem connecting to database: ' + error.message);
+    throw error;
+  });
 }

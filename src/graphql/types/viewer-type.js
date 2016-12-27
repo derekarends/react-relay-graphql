@@ -16,7 +16,7 @@ export const viewerType = new GraphQLObjectType({
       type: userConnection,
       description: 'A list of users',
       args: connectionArgs,
-      resolve: (_, args) => connectionFromPromisedArray(getUsers(), args),
+      resolve: (parent, args, { mongodb }) => connectionFromPromisedArray(getUsers(mongodb), args),
     },
   }),
   interfaces: () => [nodeInterface],

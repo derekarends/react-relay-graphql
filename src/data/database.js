@@ -1,4 +1,3 @@
-//@flow
 import Viewer from '../models/viewer';
 import User from '../models/user';
 
@@ -20,19 +19,14 @@ const users = [
   },
 ];
 
-export const getViewer = (id: any) => {
+export const getViewer = id =>
   new Promise(resolve =>
     resolve(new Viewer(id)));
-}
 
-export const getUsers = () => {
-  new Promise(resolve =>
-    setImmediate(() =>
-      resolve(users.map(u => new User(u)))));
-}
+export const getUsers = mongodb =>
+  mongodb.collection('users').find({}).toArray();
 
-export const getUser = (id: any) => {
+export const getUser = id =>
   new Promise(resolve =>
     setImmediate(() =>
       resolve(new User(users.find(u => u.id === id)))));
-}
