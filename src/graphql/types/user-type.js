@@ -2,7 +2,7 @@
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
 import { nodeInterface } from '../node-definitions';
-import { getUser } from '../../data/user';
+import { getUser } from '../../repo/user';
 import User from '../../models/user';
 import { registerType } from '../type-registry';
 
