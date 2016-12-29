@@ -8,12 +8,11 @@
     "lint": "eslint *.js src tools",
     "start": "gulp start-web-server",
     "update-schema": "babel-node tools/updateSchema.js",
-    "webpack": "NODE_ENV=production webpack -p",
     "test": "./node_modules/.bin/jest",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
     "test-debug": "node --debug-brk ./node_modules/.bin/jest -i --no-cache",
     "debug": "node --inspect --debug-brk ./dist/server/server-debug.js",
-    "refresh": "gulp && npm run update-schema && npm run flow && npm run test && gulp && npm start"
+    "refresh": "gulp && npm run update-schema && npm run flow && npm run test && npm start"
   },
   "author": "Thinkovator Inc",
   "license": "ISC",
