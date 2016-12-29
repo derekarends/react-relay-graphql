@@ -3,10 +3,17 @@ import React from 'react';
 import Relay from 'react-relay';
 import { Link } from 'react-router';
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   render() {
-    const { children } = this.props;
+    let { children } = this.props;
+    if (children) {
+      children = React.cloneElement(this.props.children, {
+        auth: this.props.route.auth,
+      });
+    }
+
+    const { auth } = this.props.route;
 
     return (
       <div>
@@ -17,8 +24,9 @@ class App extends React.Component {
             </h1>
           </header>
 
-          <Link to='/'>Dashboard</Link>
-          <Link to='/admin'>Admin</Link>
+          <Link to='/login'>Login</Link>
+          { auth.loggedIn() ? <Link to='/dashboard'>Dashboard</Link> : null }
+          { auth.loggedIn() ? <Link to='/admin'>Admin</Link> : null }
 
           {children}
 
@@ -27,13 +35,3 @@ class App extends React.Component {
     );
   }
 }
-
-export default Relay.createContainer(App, {
-  fragments: {
-    viewer: () => Relay.QL`
-      fragment on Viewer {
-        id
-      }
-    `,
-  },
-});

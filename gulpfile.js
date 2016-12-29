@@ -1,11 +1,8 @@
-const fs = require('fs');
 const webpack = require('webpack');
 const webpackStream = require('webpack-stream');
 const gulp = require('gulp');
 const babel = require('gulp-babel');
 const sass = require('gulp-sass');
-const jest = require('jest-cli');
-const config = require('./config');
 
 const serverAppFiles = ['src/**/*.js', '!src/www/**'];
 const webAppHtmlFiles = ['src/www/**/*.html'];
@@ -61,7 +58,7 @@ gulp.task('process-web-app-js', () =>
         .catch(err => console.dir(err)));
 
 gulp.task('start-web-server', () => {
-    require('./dist/server/server.js').default(config);
+    require('./dist/server/server.js').default();
   });
 
 gulp.task('default', [

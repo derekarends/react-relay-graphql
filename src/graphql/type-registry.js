@@ -1,13 +1,12 @@
-//@flow
 import { fromGlobalId } from 'graphql-relay';
 
 const types = {};
 
-export const registerType = (model: any, type: any, lookupFn: any) => {
+export const registerType = (model, type, lookupFn) => {
   types[type.name] = { model, type, lookupFn };
 };
 
-export const getNode = (globalId: any) => {
+export const getNode = globalId => {
   const { type : typeName, id: id, } = fromGlobalId(globalId);
 
   if (types[typeName]) {
@@ -17,7 +16,7 @@ export const getNode = (globalId: any) => {
   }
 };
 
-export const getNodeType = (obj: any) => {
+export const getNodeType = obj => {
   for (let typeName of Object.keys(types)) {
     if (obj instanceof types[typeName].model) {
       return types[typeName].type;

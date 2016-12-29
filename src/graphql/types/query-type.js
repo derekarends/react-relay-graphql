@@ -2,7 +2,7 @@
 import { GraphQLObjectType } from 'graphql';
 import { viewerType } from './viewer-type';
 import { nodeField } from '../node-definitions';
-import { getViewer } from '../../data/database';
+import { getViewer } from '../../repo/viewer';
 
 export const queryType = new GraphQLObjectType({
   name: 'Query',

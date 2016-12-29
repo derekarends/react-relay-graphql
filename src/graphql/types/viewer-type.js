@@ -2,7 +2,8 @@
 import { GraphQLObjectType } from 'graphql';
 import { globalIdField, connectionArgs, connectionFromPromisedArray } from 'graphql-relay';
 import { nodeInterface } from '../node-definitions';
-import { getViewer, getUsers } from '../../data/database';
+import { getViewer } from '../../repo/viewer';
+import { getUsers } from '../../repo/user';
 import Viewer from '../../models/viewer';
 import { registerType } from '../type-registry';
 import { userConnection } from '../connections/user-connection';
@@ -16,7 +17,7 @@ export const viewerType = new GraphQLObjectType({
       type: userConnection,
       description: 'A list of users',
       args: connectionArgs,
-      resolve: (_, args) => connectionFromPromisedArray(getUsers(), args),
+      resolve: (parent, args, { mongodb }) => connectionFromPromisedArray(getUsers(mongodb), args),
     },
   }),
   interfaces: () => [nodeInterface],

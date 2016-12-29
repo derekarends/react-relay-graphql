@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import User from '../../src/www/js/components/User.js';
 
 jest.unmock('../../src/www/js/components/User.js');
