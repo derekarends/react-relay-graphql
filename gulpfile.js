@@ -4,6 +4,8 @@ const gulp = require('gulp');
 const babel = require('gulp-babel');
 const sass = require('gulp-sass');
 const dotenv = require('dotenv');
+const fs = require('fs');
+const del = require('del');
 
 const serverAppFiles = ['src/**/*.js', '!src/www/**'];
 const webAppHtmlFiles = ['src/www/**/*.html'];
@@ -11,6 +13,10 @@ const webAppSassFiles = ['src/www/css/**/*.scss'];
 const entryPoints = ['./src/www/js/index.js'];
 
 const production = process.env.NODE_ENV === 'production';
+
+gulp.task('clean-dist', () => {
+  del(['dist/*']);
+});
 
 gulp.task('process-server-app', () =>
   gulp.src(serverAppFiles)
@@ -35,7 +41,8 @@ gulp.task('process-web-app-js', () => {
         gulp.src(entryPoint)
             .pipe(webpackStream({
               output: {
-                filename: 'bundle.js',
+                filename: 'bundle-[hash].js',
+                chunkFilename: 'bundle-[chunkhash].js'
               },
               module: {
                 loaders: [
@@ -58,6 +65,28 @@ gulp.task('process-web-app-js', () => {
                   'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
                   'window.fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
                 }),
+                new webpack.optimize.DedupePlugin(),
+                new webpack.optimize.UglifyJsPlugin(),
+                function () {
+                  this.plugin('done', function (stats) {
+                    var replaceInFile = function (filePath, toReplace, replacement) {
+                      var replacer = function (match) {
+                        // console.log('Replacing in %s: %s => %s', filePath, match, replacement);
+                        return replacement;
+                      };
+                      var str = fs.readFileSync(filePath, 'utf8');
+                      var out = str.replace(new RegExp(toReplace, 'g'), replacer);
+                      fs.writeFileSync(filePath, out);
+                    };
+
+                    var hash = stats.hash;
+
+                    replaceInFile('./dist/www/index.html',
+                        'bundle.js',
+                        'bundle-' + hash + '.js'
+                    );
+                  });
+                }
               ],
               devtool: production ? 'source-map' : 'eval-source-map',
             }))
