@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm run lint && npm run update-schema && npm run webpack",
     "lint": "eslint *.js src tools",
-    "start": "gulp start-web-server",
+    "start": "gulp && gulp start-web-server",
     "update-schema": "babel-node tools/updateSchema.js",
     "test": "./node_modules/.bin/jest",
     "flow": "flow; test $? -eq 0 -o $? -eq 2",
