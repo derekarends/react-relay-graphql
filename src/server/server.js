@@ -27,7 +27,7 @@ export default function() {
       },
     });
 
-    app.use('/graphql', authenticate, graphqlHttp(graphqlHttpConfig(schema)));
+    app.use(process.env.GRAPHQL_ENDPOINT, authenticate, graphqlHttp(graphqlHttpConfig(schema)));
     app.use('/libs', express.static(path.join(__dirname, '../../node_modules')));
     app.use(express.static(process.env.WEBSERVER_FOLDER));
 

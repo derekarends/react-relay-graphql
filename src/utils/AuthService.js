@@ -7,12 +7,12 @@ const history = useRouterHistory(createHashHistory)({ queryKey: false });
 
 export default class AuthService {
   constructor() {
-    let clientId = '27NNB9NTFCZ0sMOc1OxGm1cA4hF1miqV';
-    let domain = 'thinkovator.auth0.com';
+    let clientId = __AUTH0_CLIENT_ID__;
+    let domain = __AUTH0_DOMAIN__;
 
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'http://localhost:3000/#/dashboard',
+        redirectUrl: __ENVIRONMENT_URL__ + '/#/dashboard',
         responseType: 'token',
       },
     });
