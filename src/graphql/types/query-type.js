@@ -1,6 +1,6 @@
 //@flow
 import { GraphQLObjectType } from 'graphql';
-import { viewerType } from './viewer-type';
+import { viewerType } from './viewer/viewer-type';
 import { nodeField } from '../node-definitions';
 import { getViewer } from '../../repo/viewer';
 

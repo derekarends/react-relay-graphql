@@ -2,12 +2,12 @@
 import React from 'react';
 import Relay from 'react-relay';
 
+import AddUser from './AddUser';
 import UserList from './UserList';
 
 class Admin extends React.Component {
   static propTypes = {
-    viewer: React.PropTypes.object.isRequired,
-    relay: React.PropTypes.object.isRequired,
+    viewer: React.PropTypes.object.isRequired
   };
 
   render() {
@@ -16,7 +16,7 @@ class Admin extends React.Component {
     return (
       <div>
           Welcome to the admin view {viewer.id}
-
+          <AddUser />
           <UserList viewer={viewer} />
       </div>
     );

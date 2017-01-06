@@ -7,3 +7,8 @@ export const getUser = id =>
   new Promise(resolve =>
     setImmediate(() =>
       resolve(new User(users.find(u => u.id === id)))));
+
+export const insertUser = user =>
+  new Promise(resolve =>
+    setImmediate(() =>
+      resolve(new User(users.find(u => u.id === id)))));

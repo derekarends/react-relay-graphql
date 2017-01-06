@@ -58,11 +58,6 @@ describe('<UserList />', () => {
 
     const component = shallow(<UserList viewer={viewer} />);
 
-    expect(component.contains(
-      <ul>
-        <User user={node} />
-        <User user={node} />
-      </ul>
-    )).toBe(true);
+    expect(component.find('User').length).toBe(2);
   });
 });
