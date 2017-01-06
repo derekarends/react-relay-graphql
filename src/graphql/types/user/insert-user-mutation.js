@@ -5,10 +5,10 @@ import { UserEdge } from '../connections/user-connection';
 import { getViewer } from '../../repo/viewer';
 import { getUsers, insertUser } from '../../repo/user';
 
-export const insertWidgetMutationType = mutationWithClientMutationId({
-  name: 'InsertWidget',
+export const insertUserMutationType = mutationWithClientMutationId({
+  name: 'InsertUser',
   inputFields: {
-    widget: { type: insertWidgetInputType },
+    user: { type: insertUserInputType },
   },
   outputFields: {
     viewer: {

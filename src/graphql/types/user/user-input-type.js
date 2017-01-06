@@ -15,13 +15,13 @@ const fields = {
   },
 };
 
-export const userInsertInputType = new GraphQLInputObjectType({
+export const insertUserInputType = new GraphQLInputObjectType({
 	name: 'InputInsertUser',
 	description: 'A user',
 	fields: () => fields
 });
 
-export const userUpdateInputType = new GraphQLInputObjectType({
+export const updateUserInputType = new GraphQLInputObjectType({
 	name: 'InputUpdateUser',
 	description: 'A user',
 	fields: () => Object.assign({}, fields, { id: { type: GraphQLID, description: 'User id to update' } })
