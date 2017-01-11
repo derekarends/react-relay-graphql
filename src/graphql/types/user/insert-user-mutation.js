@@ -1,9 +1,10 @@
-import { mutationWithClientMutationId, fromGlobalId, offsetToCursor } from 'graphql-relay';
+//@flow
+import { mutationWithClientMutationId, offsetToCursor } from 'graphql-relay';
 import { insertUserInputType } from './user-input-type';
-import { viewerType } from './viewer-type';
-import { UserEdge } from '../connections/user-connection';
-import { getViewer } from '../../repo/viewer';
-import { getUsers, insertUser } from '../../repo/user';
+import { viewerType } from '../viewer/viewer-type';
+import { UserEdge } from '../../connections/user-connection';
+import { getViewer } from '../../../repo/viewer';
+import { getUsers, insertUser } from '../../../repo/user';
 
 export const insertUserMutationType = mutationWithClientMutationId({
   name: 'InsertUser',
@@ -15,21 +16,19 @@ export const insertUserMutationType = mutationWithClientMutationId({
       type: viewerType,
       resolve: () => getViewer(1),
     },
-    widgetEdge: {
-      type: WidgetEdge,
-      resolve: widget => {
-        return getWidgets().then(widgets => {
-          const offset = widgets.indexOf(widgets.find(w => w.id === widget.id));
+    userEdge: {
+      type: UserEdge,
+      resolve: (user, args, { mongodb }) =>
+        getUsers(mongodb).then(users => {
+          const offset = users.indexOf(users.find(f => f._id === user._id));
           return {
             cursor: offsetToCursor(offset),
-            node: widget,
+            node: user,
           };
-        });
-      },
+        })
     },
   },
-  mutateAndGetPayload: ({ widget }) => {
-    widget.ownerId = parseInt(fromGlobalId(widget.ownerId).id, 10);
-    return insertWidget(widget);
+  mutateAndGetPayload: ({ user }) => {
+    return insertUser(user);
   },
 });

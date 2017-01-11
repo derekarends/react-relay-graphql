@@ -1,6 +1,6 @@
 //@flow
 import { GraphQLObjectType } from 'graphql';
-import { insertUserMutationType } from './user/insert-user-mutation-type';
+import { insertUserMutationType } from './user/insert-user-mutation';
 // import { updateWidgetMutationType } from './update-widget-mutation-type';
 // import { deleteWidgetMutationType } from './delete-widget-mutation-type';
 //

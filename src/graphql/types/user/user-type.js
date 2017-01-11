@@ -1,10 +1,10 @@
 //@flow
 import { GraphQLObjectType, GraphQLString } from 'graphql';
 import { globalIdField } from 'graphql-relay';
-import { nodeInterface } from '../node-definitions';
-import { getUser } from '../../repo/user';
-import User from '../../models/user';
-import { registerType } from '../type-registry';
+import { nodeInterface } from '../../node-definitions';
+import { getUser } from '../../../repo/user';
+import User from '../../../models/user';
+import { registerType } from '../../type-registry';
 
 export const userType = new GraphQLObjectType({
   name: 'User',

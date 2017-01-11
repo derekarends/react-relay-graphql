@@ -1,28 +1,28 @@
-import { GraphQLInputObjectType, GraphQLString, GraphQLID } from 'graphql';
+//@flow
+import { GraphQLInputObjectType, GraphQLString } from 'graphql';
+import { globalIdField } from 'graphql-relay';
 
 const fields = {
-  name: {
+  firstName: {
     type: GraphQLString,
-    description: 'The user name',
+    description: 'A user first name',
   },
-  description: {
+  lastName: {
     type: GraphQLString,
-    description: 'The user description',
-  },
-  ownerId: {
-    type: GraphQLID,
-    description: 'The admins\'s user',
+    description: 'A user last name',
   },
 };
 
 export const insertUserInputType = new GraphQLInputObjectType({
-	name: 'InputInsertUser',
-	description: 'A user',
-	fields: () => fields
-});
+    name: 'InputInsertUser',
+    description: 'A user',
+    fields: () => fields,
+  });
 
 export const updateUserInputType = new GraphQLInputObjectType({
-	name: 'InputUpdateUser',
-	description: 'A user',
-	fields: () => Object.assign({}, fields, { id: { type: GraphQLID, description: 'User id to update' } })
-});
+    name: 'InputUpdateUser',
+    description: 'A user',
+    fields: () => Object.assign({}, fields, {
+      id: globalIdField('User', (obj, context, info) => obj._id),
+    }),
+  });

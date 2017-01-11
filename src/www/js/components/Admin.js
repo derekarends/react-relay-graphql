@@ -5,10 +5,17 @@ import Relay from 'react-relay';
 import AddUser from './AddUser';
 import UserList from './UserList';
 
+import InsertUserMutation from '../mutations/user/insert-user-mutation';
+
 class Admin extends React.Component {
   static propTypes = {
     viewer: React.PropTypes.object.isRequired
   };
+
+  _onSave(user) {
+    // Relay.Store.commitUpdate(new InsertUserMutation(
+    //   Object.assign({ viewer: this.props.viewer, user: null }, user)));
+  }
 
   render() {
     const { viewer } = this.props;
@@ -16,7 +23,7 @@ class Admin extends React.Component {
     return (
       <div>
           Welcome to the admin view {viewer.id}
-          <AddUser />
+          <AddUser onSave={this._onSave()}/>
           <UserList viewer={viewer} />
       </div>
     );
