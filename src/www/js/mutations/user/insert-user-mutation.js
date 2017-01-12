@@ -11,8 +11,6 @@ export default class extends Relay.Mutation {
     return Relay.QL`mutation { insertUser }`;
   }
 
-  // receives the parameters from the constructor, builds
-  // the variables to send the GraphQL server
   getVariables() {
     return {
       user: {

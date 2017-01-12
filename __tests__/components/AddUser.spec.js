@@ -14,14 +14,19 @@ describe('<AddUser />', () => {
     expect(component.html()).toContain('<div>');
   });
 
-  it('contains an input field', () => {
+  it('contains a first name input field', () => {
     const component = shallow(<AddUser />);
-    expect(component.find('[type="text"]').length).toBe(1);
+    expect(component.find('[name="firstName"]').length).toBe(1);
   });
 
-  it('contains a submit button', () => {
+  it('contains a last name input field', () => {
     const component = shallow(<AddUser />);
-    expect(component.find('[type="button"]').length).toBe(1);
+    expect(component.find('[name="lastName"]').length).toBe(1);
+  });
+
+  it('contains a save button', () => {
+    const component = shallow(<AddUser />);
+    expect(component.find('[name="save"]').length).toBe(1);
   });
 
   it('contains a submit button with a value of Submit', () => {

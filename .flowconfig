@@ -1,0 +1,3 @@
+[ignore]
+.*/node_modules/auth0-lock/.*
+.*/node_modules/reqwest/.*
