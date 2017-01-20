@@ -1,29 +1,23 @@
 # README #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+To use this application you will need to create a .env file that sits at the root of the directory with the following fields filled out for your environment needs
 
-### What is this repository for? ###
+AUTH0_CLIENT_ID=
+AUTH0_CLIENT_SECRET=
+AUTH0_DOMAIN=
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+DATABASE_URL=
 
-### How do I get set up? ###
+ENVIRONMENT_URL=
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+GRAPHQL_ENDPOINT=
+GRAPHQL_GRAPHI=
+GRAPHQL_PRETTY=
 
-### Contribution guidelines ###
+WEBSERVER_FOLDER=
+WEBSERVER_PORT=
 
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Once those field are populated you will want to run the following steps:
+* gulp
+* npm run update-schema 
+* npm start
