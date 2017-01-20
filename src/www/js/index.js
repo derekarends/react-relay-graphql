@@ -15,7 +15,8 @@ const history = useRouterHistory(createHashHistory)({ queryKey: false });
 const token = new AuthService().getToken();
 
 Relay.injectNetworkLayer(
-  new Relay.DefaultNetworkLayer('http://localhost:3000/graphql', {
+  // $FlowFixMe: environment variables
+  new Relay.DefaultNetworkLayer(__ENVIRONMENT_URL__ + __GRAPHQL_ENDPOINT__, {
     headers: {
       Authorization: 'Bearer ' + token,
     },

@@ -1,15 +1,18 @@
 import Auth0Lock from 'auth0-lock';
 import { browserHistory } from 'react-router';
+import useRouterHistory from 'react-router/lib/useRouterHistory';
+import createHashHistory from 'history/lib/createHashHistory';
+
+const history = useRouterHistory(createHashHistory)({ queryKey: false });
 
 export default class AuthService {
   constructor() {
-    // Configure Auth0
-    let clientId = '27NNB9NTFCZ0sMOc1OxGm1cA4hF1miqV';
-    let domain = 'thinkovator.auth0.com';
+    let clientId = __AUTH0_CLIENT_ID__;
+    let domain = __AUTH0_DOMAIN__;
 
     this.lock = new Auth0Lock(clientId, domain, {
       auth: {
-        redirectUrl: 'http://localhost:3000/#/dashboard',
+        redirectUrl: __ENVIRONMENT_URL__ + '/#/dashboard',
         responseType: 'token',
       },
     });
@@ -21,34 +24,28 @@ export default class AuthService {
   }
 
   _doAuthentication(authResult) {
-    // Saves the user token
     this.setToken(authResult.idToken);
-    // navigate to the home route
     browserHistory.replace('/#/dashboard');
   }
 
   login() {
-    // Call the show method to display the widget.
     this.lock.show();
   }
 
   loggedIn() {
-    // Checks if there is a saved token and it's still valid
     return !!this.getToken();
   }
 
   setToken(idToken) {
-    // Saves user token to local storage
     localStorage.setItem('id_token', idToken);
   }
 
   getToken() {
-    // Retrieves the user token from local storage
     return localStorage.getItem('id_token');
   }
 
   logout() {
-    // Clear user token and profile data from local storage
     localStorage.removeItem('id_token');
+    history.push('/#/home');
   }
 }

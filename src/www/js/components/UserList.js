@@ -30,7 +30,7 @@ export default Relay.createContainer(UserList, {
   fragments: {
     viewer: () => Relay.QL`
       fragment on Viewer {
-        users(first: 2) {
+        users(first: 5) {
           edges {
 						node {
               id

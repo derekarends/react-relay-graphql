@@ -3,6 +3,8 @@ import React from 'react';
 import Relay from 'react-relay';
 import { Link } from 'react-router';
 
+import Login from './Login';
+
 export default class App extends React.Component {
 
   render() {
@@ -24,7 +26,7 @@ export default class App extends React.Component {
             </h1>
           </header>
 
-          <Link to='/login'>Login</Link>
+          <Login auth={auth} />
           { auth.loggedIn() ? <Link to='/dashboard'>Dashboard</Link> : null }
           { auth.loggedIn() ? <Link to='/admin'>Admin</Link> : null }
 

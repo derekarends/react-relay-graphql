@@ -1,5 +1,5 @@
 //@flow
-import { userType } from '../types/user-type';
+import { userType } from '../types/user/user-type';
 import { connectionDefinitions } from 'graphql-relay';
 
 export const {
