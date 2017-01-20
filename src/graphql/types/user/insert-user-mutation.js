@@ -4,7 +4,7 @@ import { insertUserInputType } from './user-input-type';
 import { viewerType } from '../viewer/viewer-type';
 import { UserEdge } from '../../connections/user-connection';
 import { getViewer } from '../../../repo/viewer';
-import { getUsers, insertUser } from '../../../repo/user';
+import UserRepo from '../../../repo/user';
 
 export const insertUserMutationType = mutationWithClientMutationId({
   name: 'InsertUser',
@@ -19,7 +19,7 @@ export const insertUserMutationType = mutationWithClientMutationId({
     userEdge: {
       type: UserEdge,
       resolve: (user, args, { mongodb }) =>
-        getUsers(mongodb).then(users => {
+        UserRepo.getUsers(mongodb).then(users => {
           const offset = users.indexOf(users.find(f => f._id === user._id));
           return {
             cursor: offsetToCursor(offset),
@@ -29,6 +29,6 @@ export const insertUserMutationType = mutationWithClientMutationId({
     },
   },
   mutateAndGetPayload: ({ user }) => {
-    return insertUser(user);
+    return UserRepo.insertUser(user);
   },
 });
